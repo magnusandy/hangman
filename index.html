@@ -7,16 +7,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-navbar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
-</style>
+<link rel="stylesheet" href="css/hangmanStyle.css">
 <body class="w3-sand">
-
 <!-- Navbar -->
 <header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
- <img src="noose.png" style="width:70px;height:70px; float: left;">
+ <img src="noose.png" class="noose-image">
  <h1>Hangman</h1>
 </header>
 
@@ -34,17 +29,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <form class="w3-container">
         <label class="w3-label w3-text-black">Or enter a phrase to create a puzzle</label>
         <div class="w3-container w3-padding-hor-8">
-            <input class="w3-input  w3-border" style="float: left; width: calc(100% - 100px);"type="text"> 
-            <button class="w3-btn w3-black w3-border" style="width:100px; height:40px; ">Generate</button>
+            <input class="w3-input  w3-border input-textbar" type="text"> 
+            <button class="w3-btn w3-black w3-border input-button-group">Generate</button>
     </form>
   </div>
     <!--Generated Link-->
     <div class="w3-padding-ver-16">
         <div class="w3-container w3-padding-hor-8 w3-padding-ver-16">
-            <input class="w3-input w3-white w3-border" style="float: left; width: calc(100% - 100px);"type="text">
-            <div class="w3-btn-group"style="width:100px; height:40px; float: right;"> 
-                <button class="w3-btn w3-black w3-border" style="width:50px; height:40px"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
-                <button class="w3-btn w3-black w3-padding-0	w3-border" style="width:50px; height:40px">Play</button>
+            <input class="w3-input w3-white w3-border input-textbar" type="text">
+            <div class="w3-btn-group input-button-group"> 
+                <button class="w3-btn w3-black w3-border input-grouped-buttons-2">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                </button>
+                <button class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2">Play</button>
             </div>
         </div>
     </div>
