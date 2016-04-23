@@ -1,54 +1,126 @@
 
 <!DOCTYPE html>
-<html>
-<title>W3.CSS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/hangmanStyle.css">
-<body class="w3-sand">
-<!-- Navbar -->
+<html style="height:100%">
+<head>
+  <title>W3.CSS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/hangmanStyle.css">
+  <script>
+  
+  /*
+  Function will generate a puzzle link and place it in the below box if the user input is valid, if not, the warning 
+  will be displayed.
+  */
+  function pressGenerateButton()
+  {
+    var puzzleText = document.getElementById("userPuzzle").value;
+    var valid = validateUserInput(puzzleText);
+    if(valid)//the string contains only letters
+    {
+      //reset the warning if it is shown
+      warning = document.getElementById("validationWarning");
+      if (warning.className.indexOf("w3-hide") == -1)//If the warning is NOT hidden, then hide it
+      {
+        warning.className += " w3-hide";//hide the warning
+      } 
+      cleanPuzzle = cleanPuzzleString(puzzleText);
+      generateLink(cleanPuzzle)
+    }
+    else//string contains invalid characters, reveal the warning label
+    {
+      warning = document.getElementById("validationWarning");
+      warning.className = warning.className.replace(" w3-hide", "");
+    }
+    
+  }
+    /*
+  Validates the submitted string by checking to make sure that the characters of the string are 
+  only letters (a-z, A-Z) or spaces. 
+  */
+  function validateUserInput(userInput)
+  {
+    var regex=/^[a-zA-Z ]+$/;//checks to see if the character is a letter
+    for(i=0;i<userInput.length;i++)
+    {
+    var inputChar = userInput[i]
+      if (!inputChar.match(regex))//if the input character in not a letter then false
+      {
+          console.log("input failed at this character ( "+ userInput[i]+" )")
+          return false;
+      }
+    }
+    return true
+  }
+  
+  /*
+    Cleanse the input string, trim away leading/trailing spaces as well as change all to UPPERCASE
+  */
+  function cleanPuzzleString(puzzleString)
+  {
+   puzzleString = puzzleString.toUpperCase();
+   puzzleString = puzzleString.trim();
+   return puzzleString;
+  }
+  
+  /*
+  Based on the given string "puzzleText" generate a base64 encoded value and use it to create a puzzle link
+  */
+  function generateLink(puzzleText)
+  {
+    encodedPuzzle = window.btoa(puzzleText)
+    console.log("file:///home/magnusandy/Documents/Github/hangman/puzzle.html?string="+encodedPuzzle)
+  }
+
+  </script>
+</head>
+<body class="w3-sand" style="height:100%">
 <header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
  <img src="noose.png" class="noose-image">
  <h1>Hangman</h1>
 </header>
+<div class="w3-container" style="height:100%">
+<!-- Navbar -->
+
 
 
 <!-- Header -->
 <div class="w3-container w3-sand w3-center w3-padding-hor-64">
   <div class="">
   <p class="w3-xlarge">Press Play to start a new game</p>
-  <button class="w3-border w3-btn w3-padding-hor-16 w3-padding-ver-64 w3-large">Play</button>
+  <button id="playButton" class="w3-border w3-btn w3-padding-hor-16 w3-padding-ver-64 w3-large">Play</button>
   </div>
 </div>
 <!-- Header -->
 <div class="w3-container w3-sand w3-center">
   <div class="w3-padding-ver-16">
-    <form class="w3-container">
+    <div class="w3-container">
         <label class="w3-label w3-text-black">Or enter a phrase to create a puzzle</label>
         <div class="w3-container w3-padding-hor-8">
-            <input class="w3-input  w3-border input-textbar" type="text"> 
-            <button class="w3-btn w3-black w3-border input-button-group">Generate</button>
-    </form>
+            <input id="userPuzzle" class="w3-input  w3-border input-textbar" type="text"> 
+            <button id="generateButton" onclick="pressGenerateButton()" class="w3-btn w3-black w3-border input-button-group">Generate</button>
+            <label id="validationWarning" class="w3-label w3-text-red w3-hide" style="float: left;">*Numbers or puncuation not allowed</label>
+    </div>
   </div>
     <!--Generated Link-->
     <div class="w3-padding-ver-16">
         <div class="w3-container w3-padding-hor-8 w3-padding-ver-16">
-            <input class="w3-input w3-white w3-border input-textbar" type="text">
+            <input id="generatedLink" class="w3-input w3-white w3-border input-textbar" type="text">
             <div class="w3-btn-group input-button-group"> 
-                <button class="w3-btn w3-black w3-border input-grouped-buttons-2">
+                <button id="copyGeneratedButton" class="w3-btn w3-black w3-border input-grouped-buttons-2">
                     <i class="fa fa-clipboard" aria-hidden="true"></i>
                 </button>
-                <button class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2">Play</button>
+                <button id="playGeneratedButton" class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2">Play</button>
             </div>
         </div>
     </div>
  
   </div>
 </div>
-
+</div>
 <!-- Footer -->
 <footer class="w3-container w3-center w3-sand"> 
  <p>Create by: Andrew Magnus</p>
