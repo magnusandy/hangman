@@ -1,0 +1,56 @@
+<html>
+ 	<head>
+    <title>W3.CSS</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="css/hangmanStyle.css">
+ 		<script>
+ 		//https://css-tricks.com/snippets/javascript/get-url-variables/
+ 		function getQueryVariable(variable)
+ 		{
+ 			   var query = window.location.search.substring(1);
+ 			   var vars = query.split("&");
+ 			   for (var i=0;i<vars.length;i) {
+ 					   var pair = vars[i].split("=");
+ 					   if(pair[0] == variable){return pair[1];}
+ 			   }
+ 			   return(false);
+ 		}
+ 
+
+ 		</script>
+ 	</head>
+<body class="w3-sand">
+<!-- Navbar -->
+<header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
+ <img src="noose.png" class="noose-image">
+ <h1>Hangman</h1>
+</header>
+
+
+<!-- Header -->
+<div class="w3-container w3-sand w3-center w3-padding-hor-64">
+  <div class="">
+  <p id="header" class="w3-xlarge"></p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-sand"> 
+ <p>Create by: Andrew Magnus</p>
+ <p>Powered by: <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+
+</body>
+ 	<footer>
+ 		<script>
+ 		var x = getQueryVariable("string")
+ 		var decode = window.atob(x)
+ 		document.getElementById("header").innerHTML = decode;
+ 		</script>
+ 	</footer>
+ </html>
