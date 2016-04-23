@@ -33,3 +33,23 @@ body,h1,h2,h3,h4,h5,h6
     float: left;
 }
 
+html, body
+{
+	height: 100%;
+}
+
+/*Connected to the main-footer class, which is 90 height*/
+.main-body
+{
+	height:calc(100% - 90px);
+}
+
+.main-footer
+{
+	height:90px;
+}
+
+#validationWarning
+{
+	float: left;
+}
