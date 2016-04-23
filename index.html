@@ -10,15 +10,18 @@
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/hangmanStyle.css">
   <script>
-  
   /*
-  Function will generate a puzzle link and place it in the below box if the user input is valid, if not, the warning 
-  will be displayed.
+  Function will generate a puzzle link and place it in the below box if the user input is valid, if not, the warning will be displayed. Or if the input is blank, any links will be removed
   */
   function pressGenerateButton()
   {
     var puzzleText = document.getElementById("userPuzzle").value;
     var valid = validateUserInput(puzzleText);
+	if(puzzleText == "")//if there is nothing in the box, clear the generated link box
+	{
+		document.getElementById("generatedLink").value = ""
+		return
+	}
     if(valid)//the string contains only letters
     {
       //reset the warning if it is shown
@@ -28,7 +31,7 @@
         warning.className += " w3-hide";//hide the warning
       } 
       cleanPuzzle = cleanPuzzleString(puzzleText);
-      generateLink(cleanPuzzle)
+      addGeneratedLinkToPage(cleanPuzzle)
     }
     else//string contains invalid characters, reveal the warning label
     {
@@ -67,22 +70,58 @@
   }
   
   /*
-  Based on the given string "puzzleText" generate a base64 encoded value and use it to create a puzzle link
+  Based on the given string "puzzleText" generate a base64 encoded value and use it to create a puzzle link, return the link
   */
   function generateLink(puzzleText)
   {
     encodedPuzzle = window.btoa(puzzleText)
 	var puzzleLink = "file:///C:/Users/Andrew%20Magnus/git/hangman/puzzle.html?string="+encodedPuzzle;
     console.log(puzzleLink)
-	document.getElementById("generatedLink").value = puzzleLink;
-	
+	return puzzleLink
   }
   
+  /*Add a generated puzzle link to the page*/
+  function addGeneratedLinkToPage(puzzleText)
+  {
+	puzzleLink = generateLink(puzzleText)
+	document.getElementById("generatedLink").value = puzzleLink;
+  }
+  
+  /*
+	Highlight the text in the generated link field and copy to clipboard
+  */
   function pressCopyButton()
   {
 	var copyTextarea = document.getElementById("generatedLink");
 	copyTextarea.select();
 	document.execCommand("copy");
+  }
+  
+  /*
+	Direct the user to the puzzle page for their generated game
+  */
+  function pressGeneratedPlayButton()
+  {
+	  var link = document.getElementById("generatedLink").value;
+	  if(link != "")
+	  {
+		location.href=link;
+	  }
+  }
+  /*
+	TODO: this function will pull a random phrase from the Wheel of fortune stuff and return it
+  */
+  function pullRandomPhrase()
+  {
+	return "This is TODO"
+  }
+  
+  /*pulls the user into a randomly generated game when button is pressed*/
+  function playRandomGame()
+  {
+	var phrase = pullRandomPhrase()
+	link = generateLink(phrase)
+	location.href=link;
   }
 
   </script>
@@ -101,7 +140,7 @@
 <div class="w3-container w3-sand w3-center w3-padding-hor-64">
   <div class="">
   <p class="w3-xlarge">Press Play to start a new game</p>
-  <button id="playButton" class="w3-border w3-btn w3-padding-hor-16 w3-padding-ver-64 w3-large" title="Play new random game">Play</button>
+  <button id="playButton" onclick="playRandomGame()" class="w3-border w3-btn w3-padding-hor-16 w3-padding-ver-64 w3-large" title="Play new random game">Play</button>
   </div>
 </div>
 <!-- Header -->
@@ -123,7 +162,7 @@
                 <button id="copyGeneratedButton" onclick="pressCopyButton()" class="w3-btn w3-black w3-border input-grouped-buttons-2" title="Copy link to clipboard">
                     <i class="fa fa-clipboard" aria-hidden="true"></i>
                 </button>
-                <button id="playGeneratedButton" class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2" title="Play your phrase">Play</button>
+                <button id="playGeneratedButton" class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2" title="Play your phrase" onclick="pressGeneratedPlayButton()">Play</button>
             </div>
         </div>
     </div>
