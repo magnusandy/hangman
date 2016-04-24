@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/hangmanStyle.css">
-  <script src="js/puzzlePage.js"></script>
+  <script src="js/hangmanJS.js"></script>
 </head>
 <body class="w3-sand">
 	<header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
@@ -18,14 +18,15 @@
 	<!-- Header -->
 	<div class="w3-container w3-sand w3-center w3-padding-hor-64">
 	  <div class="">
+		<h1 id="tries" class="w3-xlarge">Tries left: 5</h1>
 		<h1 id="header" class="w3-xlarge"></h1>
 	  </div>
 	</div>
         <div class="w3-container w3-center">
         <label class="w3-label w3-text-black">Enter a guess</label>
         <div class="w3-container w3-padding-hor-8">
-            <input id="userGuess" class="w3-input  w3-border input-textbar" onkeypress="" type="text"> 
-            <button id="guessButton" onclick="" class="w3-btn w3-black w3-border input-button-group" title="submit your guess">Guess</button>
+            <input id="userGuess" class="w3-input  w3-border input-textbar" onkeypress="onEnterGuess(event)" type="text"> 
+            <button id="guessButton" onclick="pressGuessButton()" class="w3-btn w3-black w3-border input-button-group" title="submit your guess">Guess</button>
             <label id="guessWarning" class="w3-label w3-text-red w3-hide">*enter only one letter</label>
     </div>
   </div>
@@ -35,14 +36,34 @@
 		 <p>Create by: Andrew Magnus </p>
 		 <p>Powered by: <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 	</footer>
+	
+	<!-- MODAL STUFF-->
+
+
+<div id="endingModal" class="w3-modal">
+  <div class="w3-modal-content w3-center">
+    <header class="w3-container w3-khaki w3-center"> 
+      <h2 id="modalHeader"></h2>
+    </header>
+    <div class="w3-container w3-sand w3-center">
+      <p id="modalText"></p>
+    </div>
+    <footer class="w3-container w3-khaki w3-center">
+	<div class="w3-btn-group w3-center w3-padding-hor-16">
+	  <button id="newGameButton" onclick="playRandomGame()" class="w3-btn w3-black w3-border modal-button-group" title="start a new random puzzle">New Game</button>
+	  <button id="tryAgainButton" onclick="location.reload()" class="w3-btn w3-black w3-border modal-button-group" title="Try the same puzzle again">Try Again</button>
+	  <button id="homeButton" onclick="location.href='https://magnusandy.github.io/hangman'" class="w3-btn w3-black w3-border modal-button-group" title="head back to the homepage">Home</button>
+	</div>
+    </footer>
+  </div>
+</div>
 </body>
  <script>
  //MAIN DOCUMENT SCRIPT
  var x = getQueryVariable("string")//get the value from the url
  var decode = window.atob(x)//decode value from url
- initializeVisibleCharacterArray(decode)
-updateVisibleCharacterArray(decode, "A")
- var displayPuzzle = updateDisplayString(decode)
+ initializeVisibleCharacterArray()
+ var displayPuzzle = createDisplayString()
  document.getElementById("header").innerHTML = displayPuzzle;
  </script>
  </html>
