@@ -127,7 +127,7 @@ function onEnterGenerate(event)
 //-----------------------------------------PUZZLE PAGE
 
 var visibleArray; //this object hold a true/false value for every character in the puzzleString, if the value is true, the character will be visible/revealed in the game.
-var triesCounter = 5;
+var triesCounter = 6;
 //PUZZLE PAGE FUNCTIONS
 //https://css-tricks.com/snippets/javascript/get-url-variables/
 /*
@@ -193,7 +193,7 @@ if  the value is true, the character will be displayed, if false, it will be a u
             {
                 triesCounter=triesCounter-1;
 				console.log(triesCounter)
-				document.getElementById("tries").innerHTML = "Tries left: "+triesCounter
+				document.getElementById("tries").src = "images/hangman"+triesCounter+".png"
             }
         
         //console.log(visibleArray)
