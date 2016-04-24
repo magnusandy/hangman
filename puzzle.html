@@ -4,22 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/hangmanStyle.css">
-<script>
- 		//https://css-tricks.com/snippets/javascript/get-url-variables/
- 		function getQueryVariable(variable)
- 		{
- 			   var query = window.location.search.substring(1);
- 			   var vars = query.split("&");
- 			   for (var i=0;i<vars.length;i) {
- 					   var pair = vars[i].split("=");
- 					   if(pair[0] == variable){return pair[1];}
- 			   }
- 			   return(false);
- 		}
- 		</script>
+  <script src="js/puzzlePage.js"></script>
 </head>
 <body class="w3-sand">
 	<header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
@@ -30,7 +18,7 @@
 	<!-- Header -->
 	<div class="w3-container w3-sand w3-center w3-padding-hor-64">
 	  <div class="">
-		<p id="header" class="w3-xlarge"></p>
+		<h1 id="header" class="w3-xlarge"></h1>
 	  </div>
 	</div>
 	</div>
@@ -42,8 +30,9 @@
 </body>
  <script>
  //MAIN DOCUMENT SCRIPT
- var x = getQueryVariable("string")
- var decode = window.atob(x)
- document.getElementById("header").innerHTML = decode;
+ var x = getQueryVariable("string")//get the value from the url
+ var decode = window.atob(x)//decode value from url
+ var displayPuzzle = createDisplayString(decode)
+ document.getElementById("header").innerHTML = displayPuzzle;
  </script>
  </html>
