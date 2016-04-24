@@ -114,4 +114,12 @@
 	location.href=link;
   }
 
+function onEnterGenerate(event)
+{
+    if (event.keyCode == 13)
+    { 
+        pressGenerateButton();
+    }
+}
+
   

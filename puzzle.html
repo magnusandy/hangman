@@ -21,6 +21,14 @@
 		<h1 id="header" class="w3-xlarge"></h1>
 	  </div>
 	</div>
+        <div class="w3-container w3-center">
+        <label class="w3-label w3-text-black">Enter a guess</label>
+        <div class="w3-container w3-padding-hor-8">
+            <input id="userGuess" class="w3-input  w3-border input-textbar" onkeypress="" type="text"> 
+            <button id="guessButton" onclick="" class="w3-btn w3-black w3-border input-button-group" title="submit your guess">Guess</button>
+            <label id="guessWarning" class="w3-label w3-text-red w3-hide">*enter only one letter</label>
+    </div>
+  </div>
 	</div>
 	<!-- Footer -->
 	<footer class="w3-container w3-center w3-sand main-footer"> 
@@ -32,7 +40,9 @@
  //MAIN DOCUMENT SCRIPT
  var x = getQueryVariable("string")//get the value from the url
  var decode = window.atob(x)//decode value from url
- var displayPuzzle = createDisplayString(decode)
+ initializeVisibleCharacterArray(decode)
+updateVisibleCharacterArray(decode, "A")
+ var displayPuzzle = updateDisplayString(decode)
  document.getElementById("header").innerHTML = displayPuzzle;
  </script>
  </html>
