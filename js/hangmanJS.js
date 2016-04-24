@@ -100,11 +100,12 @@
 	  }
   }
   /*
-	TODO: this function will pull a random phrase from the Wheel of fortune stuff and return it
+	pull a random phrase and make it for play
   */
   function pullRandomPhrase()
   {
-	return "This is TODO"
+	randomNum = Math.floor((Math.random() * 3608));
+	return phrases[randomNum].word
   }
   
   /*pulls the user into a randomly generated game when button is pressed*/
