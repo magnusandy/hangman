@@ -326,7 +326,9 @@ if  the value is true, the character will be displayed, if false, it will be a u
 	//display modal
 	function showEndingModal()
 	{
+		
 		document.getElementById('endingModal').style.display='block';
+		document.getElementById('userGuess').blur();
 	}
 	
 
