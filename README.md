@@ -1,4 +1,2 @@
-# hangman
-this is a  readme
-
-magnusandy.github.io/hangman
+# Hangman game
+Play it here at: https://magnusandy.github.io/hangman
