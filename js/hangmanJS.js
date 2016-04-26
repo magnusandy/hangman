@@ -27,7 +27,6 @@
       warning = document.getElementById("validationWarning");
       warning.className = warning.className.replace(" w3-hide", "");
     }
-    
   }
     /*
   Validates the submitted string by checking to make sure that the characters of the string are 
