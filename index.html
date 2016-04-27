@@ -1,69 +1,63 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Hangman</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/hangmanStyle.css">
-  <script src="js/phrases.js"></script>
-  <script src="js/hangmanJS.js"></script>
-</head>
-<body class="w3-sand">
-<header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
- <a href="http://magnusandy.github.io/hangman"><img src="noose.png" class="noose-image"></a>
- <a href="http://magnusandy.github.io/hangman" style="text-decoration: none"><h1>Hangman</h1></a>
-</header>
-<div class="w3-container main-body">
-<!-- Navbar -->
-
-
-
-<!-- Header -->
-<div class="w3-container w3-sand w3-center w3-padding-hor-64">
-  <div class="">
-  <p class="w3-xlarge">Press Play to start a new game</p>
-  <button id="playButton" onclick="playRandomGame()" class="w3-border w3-btn w3-padding-hor-16 w3-padding-ver-64 w3-large" title="Play new random game">Play</button>
-  </div>
-</div>
-<!-- Header -->
-<div class="w3-container w3-sand w3-center">
-  <div class="w3-padding-ver-16">
-    <div class="w3-container">
-        <label class="w3-label w3-text-black">Or enter a phrase to create a puzzle</label>
-        <div class="w3-container w3-padding-hor-8">
-            <input id="userPuzzle" class="w3-input  w3-border input-textbar" onkeypress="onEnterGenerate(event)" type="text"> 
-            <button id="generateButton" onclick="pressGenerateButton()" class="w3-btn w3-black w3-border input-button-group" title="Generate a game based on your phrase">Generate</button>
-            <label id="validationWarning" class="w3-label w3-text-red w3-hide">*Puzzles should consist of only letters (A to Z)</label>
-    </div>
-  </div>
-    <!--Generated Link-->
-    <div class="w3-padding-ver-16">
-        <div class="w3-container w3-padding-hor-8 w3-padding-ver-16">
-            <input id="generatedLink" class="w3-input w3-white w3-border input-textbar" type="text" readonly>
-            <div class="w3-btn-group input-button-group"> 
-                <button id="copyGeneratedButton" onclick="pressCopyButton()" class="w3-btn w3-black w3-border input-grouped-buttons-2" title="Copy link to clipboard">
-                    <i class="fa fa-clipboard" aria-hidden="true"></i>
-                </button>
-                <button id="playGeneratedButton" class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2" title="Play your phrase" onclick="pressGeneratedPlayButton()">Play</button>
-            </div>
+  <head>
+    <title>Hangman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/hangmanStyle.css">
+    <script src="js/phrases.js"></script>
+    <script src="js/hangmanJS.js"></script>
+  </head>
+  <body class="w3-sand">
+    <!-- Title Header -->
+    <header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
+     <a href="http://magnusandy.github.io/hangman"><img src="noose.png" class="noose-image"></a>
+     <a href="http://magnusandy.github.io/hangman" style="text-decoration: none"><h1>Hangman</h1></a>
+    </header>
+    <!-- Main body including Play button, link generation and copy paste box -->
+    <div class="w3-container main-body">
+    <!-- Heading and Play button -->
+      <div class="w3-container w3-sand w3-center w3-padding-hor-64">
+        <div class="">
+          <p class="w3-xlarge">Press Play to start a new game</p>
+          <button id="playButton" onclick="playRandomGame()" class="w3-border w3-btn w3-padding-hor-16 w3-padding-ver-64 w3-large" title="Play new random game">Play</button>
         </div>
+      </div>
+    <!-- Text boxes and buttons for link creation  as well as footer -->
+      <div class="w3-container w3-sand w3-center">
+        <div class="w3-padding-ver-16">
+            <!-- Phrase entery and generate button -->
+          <div class="w3-container">
+              <label class="w3-label w3-text-black">Or enter a phrase to create a puzzle</label>
+              <div class="w3-container w3-padding-hor-8">
+                  <input id="userPuzzle" class="w3-input  w3-border input-textbar" onkeypress="onEnterGenerate(event)" type="text"> 
+                  <button id="generateButton" onclick="pressGenerateButton()" class="w3-btn w3-black w3-border input-button-group" title="Generate a game based on your phrase">Generate</button>
+                  <label id="validationWarning" class="w3-label w3-text-red w3-hide">*Puzzles should consist of only letters (A to Z)</label>
+            </div>
+          </div>
+          <!--Generated Link and copy and play buttons-->
+          <div class="w3-padding-ver-16">
+              <div class="w3-container w3-padding-hor-8 w3-padding-ver-16">
+                  <input id="generatedLink" class="w3-input w3-white w3-border input-textbar" type="text" readonly>
+                  <div class="w3-btn-group input-button-group"> 
+                      <button id="copyGeneratedButton" onclick="pressCopyButton()" class="w3-btn w3-black w3-border input-grouped-buttons-2" title="Copy link to clipboard">
+                          <i class="fa fa-clipboard" aria-hidden="true"></i>
+                      </button>
+                      <button id="playGeneratedButton" class="w3-btn w3-black w3-padding-0	w3-border input-grouped-buttons-2" title="Play your phrase" onclick="pressGeneratedPlayButton()">Play</button>
+                  </div>
+              </div>
+          </div>  
+        </div>
+            <!-- Footer -->
+          <div class="w3-container w3-center w3-sand main-footer"> 
+           <p>Created by: Andrew Magnus </p>
+           <p>Powered by: <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </div>
+      </div>
     </div>
- 
-  </div>
-  		<!-- Footer -->
-
-		<div class="w3-container w3-center w3-sand main-footer"> 
-		 <p>Created by: Andrew Magnus </p>
-		 <p>Powered by: <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-	</div>
-</div>
-</div>
-
-
-
-</body>
+  </body>
 </html>
