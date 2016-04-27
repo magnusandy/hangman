@@ -1,3 +1,8 @@
+//GLOBAL VARIABLES
+
+var visibleArray; //this object hold a true/false value for every character in the puzzleString, if the value is true, the character will be visible/revealed in the game.
+var triesCounter = 6;
+
 //INDEX PAGE JS FUNCTIONS
   /*
   Function will generate a puzzle link and place it in the below box if the user input is valid, if not, the warning will be displayed. Or if the input is blank, any links will be removed
@@ -6,11 +11,11 @@
   {
     var puzzleText = document.getElementById("userPuzzle").value;
     var valid = validateUserInput(puzzleText);
-	if(puzzleText == "")//if there is nothing in the box, clear the generated link box
-	{
-		document.getElementById("generatedLink").value = ""
-		return
-	}
+    if(puzzleText == "")//if there is nothing in the box, clear the generated link box
+    {
+	document.getElementById("generatedLink").value = ""
+        return
+    }
     if(valid)//the string contains only letters
     {
       //reset the warning if it is shown
@@ -37,7 +42,7 @@
     var regex=/^[a-zA-Z ]+$/;//checks to see if the character is a letter
     for(i=0;i<userInput.length;i++)
     {
-    var inputChar = userInput[i]
+      var inputChar = userInput[i]
       if (!inputChar.match(regex))//if the input character in not a letter then false
       {
           console.log("input failed at this character ( "+ userInput[i]+" )")
@@ -63,14 +68,13 @@
   function generateLink(puzzleText)
   {
     encodedPuzzle = window.btoa(puzzleText)
-    console.log("Linux Link: file:///home/magnusandy/Documents/Github/hangman/puzzle.html?string="+encodedPuzzle);
-	console.log("Win Link: file:///C:/Users/Andrew%20Magnus/git/hangman/puzzle.html?string="+encodedPuzzle);
-	var puzzleLink = "http://magnusandy.github.io/hangman/puzzle.html?string="+encodedPuzzle;
-    console.log(puzzleLink)
-	return puzzleLink
+    //console.log("Linux Link: file:///home/magnusandy/Documents/Github/hangman/puzzle.html?string="+encodedPuzzle);
+    //console.log("Win Link: file:///C:/Users/Andrew%20Magnus/git/hangman/puzzle.html?string="+encodedPuzzle);
+    var puzzleLink = "http://magnusandy.github.io/hangman/puzzle.html?string="+encodedPuzzle;
+    return puzzleLink
   }
   
-  /*Add a generated puzzle link to the page*/
+  /*Add a generated puzzle link to the link textbox*/
   function addGeneratedLinkToPage(puzzleText)
   {
 	puzzleLink = generateLink(puzzleText)
@@ -115,6 +119,7 @@
 	location.href=link;
   }
 
+/*add functionality so that when enter is pressed on the phrase box, the generate button is pressed*/
 function onEnterGenerate(event)
 {
     if (event.keyCode == 13)
@@ -125,8 +130,7 @@ function onEnterGenerate(event)
 
 //-----------------------------------------PUZZLE PAGE
 
-var visibleArray; //this object hold a true/false value for every character in the puzzleString, if the value is true, the character will be visible/revealed in the game.
-var triesCounter = 6;
+
 //PUZZLE PAGE FUNCTIONS
 //https://css-tricks.com/snippets/javascript/get-url-variables/
 /*
@@ -157,11 +161,11 @@ used to grab the base64 encoded value from the url of the page to create the puz
     */
     function initializeVisibleCharacterArray()
     {
-		var fullPuzzleString = getFullPuzzleString();
+	var fullPuzzleString = getFullPuzzleString();
         visibleArray = Array(fullPuzzleString.length)//make array same length as the puzzle String
         for(i=0;i<fullPuzzleString.length;i++)
         {
-            if(fullPuzzleString[i]==" ")
+            if(fullPuzzleString[i]==" ")//set the index of spaces to true in the visible array so they are shown right away
             {
                 visibleArray[i]=true;
             }
@@ -170,14 +174,15 @@ used to grab the base64 encoded value from the url of the page to create the puz
                 visibleArray[i]=false;
             }
         }
-        //console.log(visibleArray)
     }
     
-    /*Updates the global array visibleArray, which holds a boolean value for each character in the puzzle String,
-if  the value is true, the character will be displayed, if false, it will be a underscore*/
+/*Updates the global array visibleArray based on the guessedChar, which holds a boolean value for each character in the puzzle String,
+if  the value is true, the character will be displayed, if false, it will be a underscore
+This function also updates the hangman image on the page and lowers the tries counter if the guessedChar is not found in the puzzleString
+*/
     function updateVisibleCharacterArray(guessedChar)
     {   
-		var fullPuzzleString = getFullPuzzleString();
+	var fullPuzzleString = getFullPuzzleString();
         var correctGuess = false;
         for(i=0;i<fullPuzzleString.length;i++)
         {
@@ -191,8 +196,7 @@ if  the value is true, the character will be displayed, if false, it will be a u
             if(correctGuess == false)//no correct characters were found
             {
                 triesCounter=triesCounter-1;
-				console.log(triesCounter)
-				document.getElementById("tries").src = "images/hangman"+triesCounter+".png"
+		document.getElementById("tries").src = "images/hangman"+triesCounter+".png"
             }
         
         //console.log(visibleArray)
@@ -200,12 +204,13 @@ if  the value is true, the character will be displayed, if false, it will be a u
 
     /*
         Creates the display string based on the visibleArray and returns the new string
+        this will create a string based on the puzzleString and the visible array, if the value at index i of the visible array
+        is true then the character at index i of the puzzle string will be displayed or else it will be an underscore
     */
     function createDisplayString()
     {    
-		var fullPuzzleString = getFullPuzzleString();
+	var fullPuzzleString = getFullPuzzleString();
         var displayString = fullPuzzleString;
-                //console.log(visibleArray)
            for(i=0;i<visibleArray.length;i++)
             {   
                 if(visibleArray[i]==false)
@@ -230,7 +235,7 @@ if  the value is true, the character will be displayed, if false, it will be a u
 		var isValid = validateGuess(cleanGuess);
 		if(isValid)
 		{
-			updateVisibleCharacterArray(cleanGuess)
+			updateVisibleCharacterArray(cleanGuess)//update display  based on guess, updates tries
 			var disp = createDisplayString()
 			document.getElementById("header").innerHTML = disp;
 			warning = document.getElementById("guessWarning");
@@ -251,7 +256,7 @@ if  the value is true, the character will be displayed, if false, it will be a u
 			}
 				
 		}
-		else
+		else//guess is invalid
 		{	
 			warning = document.getElementById("guessWarning");
 			warning.className = warning.className.replace(" w3-hide", "");
@@ -261,12 +266,12 @@ if  the value is true, the character will be displayed, if false, it will be a u
 	
 	/*Calls the pressGuessButton() function when enter is pressed on the guess textbox*/
 	function onEnterGuess(event)
-{
-    if (event.keyCode == 13)
-    { 
-        pressGuessButton();
-    }
-}
+	{
+	    if (event.keyCode == 13)
+	    { 
+	        pressGuessButton();
+	    }
+	}
 	
 	/*trim the guess String and change to uppercase then return clean value*/
 	function sanatizeGuess(uncleanGuess)
@@ -294,7 +299,6 @@ if  the value is true, the character will be displayed, if false, it will be a u
 	
 	function gameOver()
 	{
-		//TODO show a popup window, should allow you to try puzzle again, quickstart or homepage
 		document.getElementById("modalHeader").innerHTML = "Game Over";
 		document.getElementById("modalText").innerHTML = "Great try, but you were not able to solve the puzzle";
 		showEndingModal()
