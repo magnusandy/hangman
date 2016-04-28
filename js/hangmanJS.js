@@ -2,6 +2,7 @@
 
 var visibleArray; //this object hold a true/false value for every character in the puzzleString, if the value is true, the character will be visible/revealed in the game.
 var triesCounter = 6;
+var usedLetters = [];
 
 //INDEX PAGE JS FUNCTIONS
   /*
@@ -183,6 +184,8 @@ This function also updates the hangman image on the page and lowers the tries co
     function updateVisibleCharacterArray(guessedChar)
     {   
 	var fullPuzzleString = getFullPuzzleString();
+                var used = isGuessUsed(guessedChar)//check guess against array, update 
+
         var correctGuess = false;
         for(i=0;i<fullPuzzleString.length;i++)
         {
@@ -195,9 +198,12 @@ This function also updates the hangman image on the page and lowers the tries co
 		}
             if(correctGuess == false)//no correct characters were found
             {
-                triesCounter=triesCounter-1;
-		document.getElementById("tries").src = "images/hangman"+triesCounter+".png"
-            }
+                if(used == false)//character hasent been used                
+                {
+                    triesCounter=triesCounter-1;
+		            document.getElementById("tries").src = "images/hangman"+triesCounter+".png"
+                }
+}
         
         //console.log(visibleArray)
     }
@@ -244,6 +250,7 @@ This function also updates the hangman image on the page and lowers the tries co
 				warning.className += " w3-hide";//hide the warning
 			}
 			document.getElementById("userGuess").value = ""//empty out the guess textbox
+            document.getElementById("letterList").innerHTML = createUsedCharList();
 			if(triesCounter == 0)//GAME OVER
 			{
 				gameOver();
@@ -333,6 +340,43 @@ This function also updates the hangman image on the page and lowers the tries co
 		document.getElementById('endingModal').style.display='block';
 		document.getElementById('userGuess').blur();
 	}
+
+/*
+This function will check the guessed char against the list of other used characters
+if the character is in the list, then return true, if the character is not in the list,
+then add it to the list and return false
+*/
+function isGuessUsed(guessedChar)
+{
+   if(usedLetters.length == 0)
+   {
+    usedLetters.push(guessedChar)
+    return false
+    }
+   for(i=0;i<usedLetters.length;i++)
+   {
+      if(guessedChar == usedLetters[i])//if the character is used already
+      {
+        return true
+      }
+   } 
+       usedLetters.push(guessedChar)
+        console.log(usedLetters)
+        return false
+}
+
+/*Returns a string of used characters*/
+function createUsedCharList()
+{
+    var usedLetterString = usedLetters[0];
+    for(i=1;i<usedLetters.length;i++)
+    {
+        usedLetterString = usedLetterString+", "+usedLetters[i]
+    }
+    return usedLetterString
+}
+
+
 	
 
 
