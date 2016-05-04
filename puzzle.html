@@ -11,12 +11,13 @@
   <script src="js/hangmanJS.js"></script>
 </head>
 <body class="w3-sand">
-	<header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
-		 <a href="http://magnusandy.github.io/hangman"><img src="noose.png" class="noose-image"></a>
-		 <a href="http://magnusandy.github.io/hangman" style="text-decoration: none"><h1>Hangman</h1></a>
-	</header>
-	<div class="w3-container main-body">
-	<!-- Header -->
+<div class="main-body">
+<header class= "w3-khaki w3-card-2 w3-top w3-left-align w3-small">
+ <a href="http://magnusandy.github.io/hangman"><img src="noose.png" class="noose-image"></a>
+ <a href="http://magnusandy.github.io/hangman" style="text-decoration: none"><h1>Hangman</h1></a>
+</header>
+<div class="w3-container w3-sand w3-center page-content">
+
 	<div class="w3-container w3-sand w3-center" style="padding-top:64px">
 	  <div class="">
 		<img id="tries" src="images/hangman6.png"><img>
@@ -30,17 +31,12 @@
             <button id="guessButton" onclick="pressGuessButton()" class="w3-btn w3-black w3-border input-button-group" title="submit your guess">Guess</button>
             <label id="guessWarning" class="w3-label w3-text-red w3-hide">*enter only one letter</label>
     </div>
-		<!-- Footer -->
-
-		<div class="w3-container w3-center w3-sand main-footer"> 
+</div>
+	<footer class="w3-center w3-sand main-footer"> 
 		 <p>Created by: Andrew Magnus </p>
 		 <p>Powered by: <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-	</div>
-  </div>
-	</div>
-	<!-- Footer -->
+	</footer>
 
-	
 	<!-- MODAL STUFF-->
 
 
@@ -61,6 +57,9 @@
     </footer>
   </div>
 </div>
+
+
+
 </body>
  <script>
  //MAIN DOCUMENT SCRIPT
