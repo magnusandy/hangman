@@ -1,0 +1,13 @@
+{
+  "name": "Hangman",
+  "short_name": "Hangman",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f0e68c",
+  "description": "Hangman web application",
+  "icons": [{
+    "src": "nooseApp.png",
+    "sizes": "200x200",
+    "type": "image/png"
+  }]
+}
